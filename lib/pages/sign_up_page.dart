@@ -1,11 +1,10 @@
-import 'package:chat_app/pages/sign_up_page.dart';
+import 'package:chat_app/pages/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
-
-class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,36 +36,36 @@ class SignInPage extends StatelessWidget {
                   ),
                   SizedBox(height: 40),
                   Text(
-                    "Sign In",
-                    style: TextStyle(fontSize: 28,color: Colors.white, fontWeight: FontWeight.bold),
+                    "Sign Up",
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold,color: Colors.white),
                   ),
+                  SizedBox(height: 10),
+                  CustomTextField(hintText: "Name"),
+                  SizedBox(height: 10),
+                  CustomTextField(hintText: "Phone"),
                   SizedBox(height: 10),
                   CustomTextField(hintText: "Email"),
                   SizedBox(height: 10),
-                  CustomTextField(hintText: 'Password'),
+                  CustomTextField(hintText: 'Password',),
                   SizedBox(height: 20),
-                  CustomButton(text: 'Sign In',),
+                  CustomButton(text: 'Sign Up',),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "don't have an account? ",
+                        "already have an account? ",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return SignUpPage();
-                              },
-                            ),
-                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context)
+                          {
+                            return SignInPage();
+                          }));
                         },
                         child: Text(
-                          "Sign Up",
+                          "Sign In",
                           style: TextStyle(
                             color: Color(0xFFFAF1A9),
                             fontSize: 20,
