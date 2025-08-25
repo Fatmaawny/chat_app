@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily:"Ubuntu"
       ),
-        debugShowCheckedModeBanner: true,
+        debugShowCheckedModeBanner: false,
         initialRoute: 'SignInPage');
   }
 }
