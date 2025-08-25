@@ -1,6 +1,7 @@
 import 'package:chat_app/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 
@@ -15,7 +16,9 @@ class SignInPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFFFAF1A9), Color(0xFFECCBBD), Color(0xFFE4AC94)],
+            colors: [KthirdColor,
+              KsecondaryColor,
+              KprimaryColor],
           ),
         ),
         child: Padding(
@@ -61,7 +64,7 @@ class SignInPage extends StatelessWidget {
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
-                            color: Color(0xFFFAF1A9),
+                            color: KthirdColor,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
