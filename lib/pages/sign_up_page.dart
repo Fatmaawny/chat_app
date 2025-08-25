@@ -59,10 +59,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)
-                          {
-                            return SignInPage();
-                          }));
+                         Navigator.pop(context);
                         },
                         child: Text(
                           "Sign In",
