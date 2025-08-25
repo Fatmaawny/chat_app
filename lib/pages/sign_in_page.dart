@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/custom_text_field.dart';
+
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 
@@ -33,35 +35,9 @@ class SignInPage extends StatelessWidget {
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 50),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: "Email",
-                      hintStyle: TextStyle(color: Colors.white),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white, width: 2),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white54, width: 2),
-                      ),
-                    ),
-                  ),
+                  CustomTextField(hintText: "Email"),
                   SizedBox(height: 10),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: "Password",
-                      hintStyle: TextStyle(color: Colors.white),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white, width: 2),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.white54, width: 2),
-                      ),
-                    ),
-                  ),
+                  CustomTextField(hintText: 'Password',),
                   SizedBox(height: 20),
                   Container(
                     height: 50,
@@ -94,7 +70,7 @@ class SignInPage extends StatelessWidget {
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Color(0xFFFAF1A9),
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
