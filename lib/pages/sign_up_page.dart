@@ -2,9 +2,10 @@ import 'package:chat_app/constants.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
+
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
-
+  final String id = 'SignUpPage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,10 +14,7 @@ class SignUpPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              KthirdColor,
-              KsecondaryColor,
-              KprimaryColor],
+            colors: [KthirdColor, KsecondaryColor, KprimaryColor],
           ),
         ),
         child: Padding(
@@ -39,7 +37,11 @@ class SignUpPage extends StatelessWidget {
                   SizedBox(height: 40),
                   Text(
                     "Sign Up",
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold,color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                   SizedBox(height: 10),
                   CustomTextField(hintText: "Name"),
@@ -48,9 +50,9 @@ class SignUpPage extends StatelessWidget {
                   SizedBox(height: 10),
                   CustomTextField(hintText: "Email"),
                   SizedBox(height: 10),
-                  CustomTextField(hintText: 'Password',),
+                  CustomTextField(hintText: 'Password'),
                   SizedBox(height: 20),
-                  CustomButton(text: 'Sign Up',),
+                  CustomButton(text: 'Sign Up'),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +63,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                         Navigator.pop(context);
+                          Navigator.pop(context);
                         },
                         child: Text(
                           "Sign In",

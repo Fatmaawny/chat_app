@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        'SignInPage' : (context) =>SignInPage(),
-        'SignUpPage' : (context) =>SignUpPage(),
+        SignInPage().id : (context) =>SignInPage(),
+        SignUpPage().id : (context) =>SignUpPage(),
       },
       theme: ThemeData(
         fontFamily:"Ubuntu"

@@ -7,7 +7,7 @@ import '../widgets/custom_text_field.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
-
+  final String id = 'SignInPage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,9 +16,7 @@ class SignInPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [KthirdColor,
-              KsecondaryColor,
-              KprimaryColor],
+            colors: [KthirdColor, KsecondaryColor, KprimaryColor],
           ),
         ),
         child: Padding(
@@ -41,14 +39,18 @@ class SignInPage extends StatelessWidget {
                   SizedBox(height: 40),
                   Text(
                     "Sign In",
-                    style: TextStyle(fontSize: 28,color: Colors.white, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(height: 10),
                   CustomTextField(hintText: "Email"),
                   SizedBox(height: 10),
                   CustomTextField(hintText: 'Password'),
                   SizedBox(height: 20),
-                  CustomButton(text: 'Sign In',),
+                  CustomButton(text: 'Sign In'),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +61,7 @@ class SignInPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, 'SignUpPage');
+                          Navigator.pushNamed(context, SignUpPage().id);
                         },
                         child: Text(
                           "Sign Up",
