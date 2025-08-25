@@ -40,7 +40,7 @@ class SignInPage extends StatelessWidget {
                     "Sign In",
                     style: TextStyle(fontSize: 28,color: Colors.white, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 11),
                   CustomTextField(hintText: "Email"),
                   SizedBox(height: 10),
                   CustomTextField(hintText: 'Password'),
