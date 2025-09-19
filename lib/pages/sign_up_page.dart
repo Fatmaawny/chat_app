@@ -73,33 +73,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 text: 'Sign Up',
                 onTapFunction: () async {
                   try {
-                    UserCredential credential = await FirebaseAuth.instance
-                        .createUserWithEmailAndPassword(
-                          email: email!,
-                          password: password!,
-                        );
+                    await signupUser();
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("The password provided is too weak."),
-                        ),
-                      );
+                      showSnackBar(context,"The password provided is too weak.");
                     } else if (e.code == 'email-already-in-use') {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            "The account already exists for that email.",
-                          ),
-                        ),
-                      );
+                      showSnackBar(context,"The account already exists for that email.");
                     }
                   } catch (e) {
                     print(e);
                   } finally {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text("Success")));
+                    showSnackBar(context,"Success");
                   }
                 },
               ),
@@ -133,5 +117,21 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  void showSnackBar(BuildContext context, String massege) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text( massege),
+      ),
+    );
+  }
+
+  Future<void> signupUser() async {
+    UserCredential credential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+          email: email!,
+          password: password!,
+        );
   }
 }
