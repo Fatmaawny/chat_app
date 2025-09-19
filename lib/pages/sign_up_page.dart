@@ -1,11 +1,21 @@
 import 'package:chat_app/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   SignUpPage({super.key});
   static String id = 'SignUpPage';
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  String? email;
+  String? password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +33,7 @@ class SignUpPage extends StatelessWidget {
           child: ListView(
             shrinkWrap: true,
             children: [
-              SizedBox(height: 30,),
+              SizedBox(height: 30),
               Container(
                 height: 180,
                 child: Image.asset("assets/images/app_logo.png"),
@@ -43,15 +53,57 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              CustomTextField(hintText: "Name"),
+
+              CustomTextField(
+                hintText: "Email",
+                onChanged: (data) {
+                  email = data;
+                },
+              ),
               SizedBox(height: 10),
-              CustomTextField(hintText: "Phone"),
-              SizedBox(height: 10),
-              CustomTextField(hintText: "Email"),
-              SizedBox(height: 10),
-              CustomTextField(hintText: 'Password'),
+              CustomTextField(
+                hintText: 'Password',
+                onChanged: (data) {
+                  password = data;
+                },
+              ),
               SizedBox(height: 20),
-              CustomButton(text: 'Sign Up'),
+
+              CustomButton(
+                text: 'Sign Up',
+                onTapFunction: () async {
+                  try {
+                    UserCredential credential = await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                          email: email!,
+                          password: password!,
+                        );
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'weak-password') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("The password provided is too weak."),
+                        ),
+                      );
+                    } else if (e.code == 'email-already-in-use') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            "The account already exists for that email.",
+                          ),
+                        ),
+                      );
+                    }
+                  } catch (e) {
+                    print(e);
+                  } finally {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text("Success")));
+                  }
+                },
+              ),
+
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

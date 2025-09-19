@@ -1,13 +1,22 @@
 import 'package:chat_app/pages/sign_up_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 
-class SignInPage extends StatelessWidget {
-   SignInPage({super.key});
+class SignInPage extends StatefulWidget {
+  SignInPage({super.key});
   static String id = 'SignInPage';
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  String? email;
+  String? password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +34,7 @@ class SignInPage extends StatelessWidget {
           child: ListView(
             shrinkWrap: true,
             children: [
-              SizedBox(height: 50,),
+              SizedBox(height: 50),
               Container(
                 height: 180,
                 child: Image.asset("assets/images/app_logo.png"),
@@ -45,11 +54,48 @@ class SignInPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              CustomTextField(hintText: "Email"),
+              CustomTextField(
+                hintText: "Email",
+                onChanged: (data) {
+                  email = data;
+                },
+              ),
               SizedBox(height: 10),
-              CustomTextField(hintText: 'Password'),
+              CustomTextField(
+                hintText: 'Password',
+                onChanged: (data) {
+                  password = data;
+                },
+              ),
               SizedBox(height: 20),
-              CustomButton(text: 'Sign In'),
+              CustomButton(
+                text: 'Sign In',
+                onTapFunction: () async {
+                  try {
+                    UserCredential credential = await FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                          email: email!,
+                          password: password!,
+                        );
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'user-not-found') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("No user found for that email."),
+                        ),
+                      );
+                    } else if (e.code == 'wrong-password') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            "Wrong password provided for that user.",
+                          ),
+                        ),
+                      );
+                    }
+                  }
+                },
+              ),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
