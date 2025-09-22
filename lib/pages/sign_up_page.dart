@@ -1,4 +1,5 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/widgets/custom_snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -82,17 +83,17 @@ class _SignUpPageState extends State<SignUpPage> {
                         setState(() {});
                         try {
                           await signupUser();
-                          showSnackBar(context, "Success");
+                          customSnackBar(context, "Success");
                           Navigator.pop(context);
                         }
                         on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {
-                            showSnackBar(
+                            customSnackBar(
                               context,
                               "The password provided is too weak.",
                             );
                           } else if (e.code == 'email-already-in-use') {
-                            showSnackBar(
+                            customSnackBar(
                               context,
                               "The account already exists for that email.",
                             );
@@ -140,11 +141,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  void showSnackBar(BuildContext context, String massege) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(massege)));
-  }
+
 
   Future<void> signupUser() async {
     UserCredential credential = await FirebaseAuth.instance
