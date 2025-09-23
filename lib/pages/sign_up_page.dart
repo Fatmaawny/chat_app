@@ -61,14 +61,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   SizedBox(height: 10),
 
-                  CustomTextField(
+                  CustomTextFormField(
                     hintText: "Email",
                     onChanged: (data) {
                       email = data;
                     },
                   ),
                   SizedBox(height: 10),
-                  CustomTextField(
+                  CustomTextFormField(
                     hintText: 'Password',
                     onChanged: (data) {
                       password = data;
