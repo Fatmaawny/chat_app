@@ -1,3 +1,4 @@
+import 'package:chat_app/pages/chat_page.dart';
 import 'package:chat_app/pages/sign_in_page.dart';
 import 'package:chat_app/pages/sign_up_page.dart';
 import 'package:flutter/foundation.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SignInPage.id: (context) => SignInPage(),
         SignUpPage.id: (context) => SignUpPage(),
+        ChatPage.id: (context) => ChatPage(),
       },
       theme: ThemeData(fontFamily: "Ubuntu"),
       debugShowCheckedModeBanner: false,

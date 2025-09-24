@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
+import 'chat_page.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({super.key});
@@ -84,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         try {
                           await signupUser();
                           customSnackBar(context, "Success");
-                          Navigator.pop(context);
+                          Navigator.pushNamed(context, ChatPage.id);
                         }
                         on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {

@@ -1,3 +1,4 @@
+import 'package:chat_app/pages/chat_page.dart';
 import 'package:chat_app/pages/sign_up_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                       if (key.currentState!.validate()) {
                         isLoading =true;
                         setState(() {});
+                        Navigator.pushNamed(context, ChatPage.id);
                         try {
                           UserCredential credential = await FirebaseAuth.instance
                               .signInWithEmailAndPassword(
