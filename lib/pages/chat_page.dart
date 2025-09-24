@@ -18,18 +18,43 @@ class ChatPage extends StatelessWidget {
           children: [
             Image.asset(Klogo, height: 62),
             SizedBox(width: 10),
-            Text("Chaty app"),
+            Text("Chaty app",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
           ],
         ),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ChatBubble(text: "Hi how are you",),
-          );
-        },
+      body: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ChatBubble(text: "Hi how are you"),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Send a message",
+                suffixIcon: Icon(Icons.send,color: KprimaryColor,),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: KprimaryColor,width: 2)
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(color: KprimaryColor,width: 2)
+                ),
+
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
