@@ -83,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                       if (key.currentState!.validate()) {
                         isLoading =true;
                         setState(() {});
-                        Navigator.pushNamed(context, ChatPage.id);
+                        Navigator.pushNamed(context, ChatPage.id,arguments:email);
                         try {
                           UserCredential credential = await FirebaseAuth.instance
                               .signInWithEmailAndPassword(

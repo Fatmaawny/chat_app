@@ -21,15 +21,15 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    var email= ModalRoute.of(context)?.settings.arguments;
     return StreamBuilder<QuerySnapshot>(
-      stream: messages.orderBy('time').snapshots(),
+      stream: messages.orderBy('time',descending: true).snapshots(),
       builder: (context, snapshot) {
         List<MessageModel> messagesList = [];
 
         for (int i = 0; i < snapshot.data!.docs.length; i++) {
           messagesList.add(MessageModel.fromjson(snapshot.data!.docs[i]));
         }
-
         if (snapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
@@ -58,13 +58,20 @@ class _ChatPageState extends State<ChatPage> {
                 Expanded(
                   flex: 1,
                   child: ListView.builder(
+                    reverse: true,
                     controller: _controller,
                     itemCount: messagesList.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Padding(
+                      if(messagesList[index].id== email){
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: ChatBubble(text: messagesList[index].message),
+                        );
+                      } else return Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: ChatBubble(text: messagesList[index].message),
+                        child: ChatBubbleForFriend(text: messagesList[index].message),
                       );
+
                     },
                   ),
                 ),
@@ -74,12 +81,13 @@ class _ChatPageState extends State<ChatPage> {
                     controller: controller,
                     onSubmitted: (data) async {
                       await messages.add({
+                        'id': email,
                         'text': controller.text,
                         'time': DateTime.now(),
                       });
                       controller.clear();
                       _controller.animateTo(
-                        _controller.position.maxScrollExtent,
+                        0,
                         duration: Duration(milliseconds: 250),
                         curve: Curves.easeOut,
                       );
@@ -91,12 +99,13 @@ class _ChatPageState extends State<ChatPage> {
                         onPressed: () async {
                           if (controller.text.isNotEmpty) {
                             await messages.add({
+                              'id': email,
                               'text': controller.text,
                               'time': DateTime.now(),
                             });
                             controller.clear();
                             _controller.animateTo(
-                              _controller.position.maxScrollExtent,
+                              0,
                               duration: Duration(milliseconds: 250),
                               curve: Curves.easeOut,
                             );

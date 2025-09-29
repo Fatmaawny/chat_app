@@ -85,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         try {
                           await signupUser();
                           customSnackBar(context, "Success");
-                          Navigator.pushNamed(context, ChatPage.id);
+                          Navigator.pushNamed(context, ChatPage.id, arguments:email);
                         }
                         on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {

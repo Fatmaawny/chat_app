@@ -24,3 +24,28 @@ final String text;
     );
   }
 }
+
+class ChatBubbleForFriend extends StatelessWidget {
+  const ChatBubbleForFriend({super.key, required this.text});
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        decoration: BoxDecoration(
+          color: KsecondaryColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+            bottomLeft: Radius.circular(20),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 17),
+          child: Text(text,style: TextStyle(fontSize: 20),),
+        ),
+      ),
+    );
+  }
+}
