@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../widgets/custom_button.dart';
-import '../widgets/custom_text_field.dart';
+import '../widgets/custom_text_form_field.dart';
 import 'chat_page.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -66,14 +66,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: "Email",
                     onChanged: (data) {
                       email = data;
-                    },
+                    }, isTextSecure: false,
                   ),
                   SizedBox(height: 10),
                   CustomTextFormField(
                     hintText: 'Password',
                     onChanged: (data) {
                       password = data;
-                    },
+                    }, isTextSecure: true,
                   ),
                   SizedBox(height: 20),
                   CustomButton(

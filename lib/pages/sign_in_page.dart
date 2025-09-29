@@ -7,7 +7,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../constants.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_snack_bar.dart';
-import '../widgets/custom_text_field.dart';
+import '../widgets/custom_text_form_field.dart';
 
 class SignInPage extends StatefulWidget {
   SignInPage({super.key});
@@ -67,14 +67,14 @@ class _SignInPageState extends State<SignInPage> {
                     hintText: "Email",
                     onChanged: (data) {
                       email = data;
-                    },
+                    }, isTextSecure: false,
                   ),
                   SizedBox(height: 10),
                   CustomTextFormField(
                     hintText: 'Password',
                     onChanged: (data) {
                       password = data;
-                    },
+                    }, isTextSecure: true,
                   ),
                   SizedBox(height: 20),
                   CustomButton(
