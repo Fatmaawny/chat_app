@@ -1,7 +1,6 @@
 import 'package:chat_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import '../models/message_model.dart';
 import '../widgets/chat_bubble.dart';
 
@@ -65,11 +64,11 @@ class _ChatPageState extends State<ChatPage> {
                       if(messagesList[index].id== email){
                         return Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: ChatBubble(text: messagesList[index].message),
+                          child: ChatBubble(text: messagesList[index].message, name: messagesList[index].id.replaceFirst('@gmail.com', ''),),
                         );
                       } else return Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: ChatBubbleForFriend(text: messagesList[index].message),
+                        child: ChatBubbleForFriend(text: messagesList[index].message, name: messagesList[index].id.replaceFirst('@gmail.com', ''),),
                       );
 
                     },
@@ -127,7 +126,7 @@ class _ChatPageState extends State<ChatPage> {
             ),
           );
         } else
-          return Text("waiting...");
+          return Center(child: Text("waiting..."));
       },
     );
   }
