@@ -13,19 +13,18 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  CollectionReference messages = FirebaseFirestore.instance.collection('messages',);
-
+  CollectionReference messages = FirebaseFirestore.instance.collection(
+    'messages',
+  );
+  final _controller = ScrollController();
   TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
     return StreamBuilder<QuerySnapshot>(
-
-      stream: messages.snapshots(),
+      stream: messages.orderBy('time').snapshots(),
       builder: (context, snapshot) {
-
-        List<MessageModel> messagesList = [];//ليست لسه فاضية
+        List<MessageModel> messagesList = [];
 
         for (int i = 0; i < snapshot.data!.docs.length; i++) {
           messagesList.add(MessageModel.fromjson(snapshot.data!.docs[i]));
@@ -59,13 +58,12 @@ class _ChatPageState extends State<ChatPage> {
                 Expanded(
                   flex: 1,
                   child: ListView.builder(
+                    controller: _controller,
                     itemCount: messagesList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: ChatBubble(
-                          text: messagesList[index].message,
-                        ),
+                        child: ChatBubble(text: messagesList[index].message),
                       );
                     },
                   ),
@@ -75,8 +73,16 @@ class _ChatPageState extends State<ChatPage> {
                   child: TextField(
                     controller: controller,
                     onSubmitted: (data) async {
-                      await messages.add({'text': controller.text});
+                      await messages.add({
+                        'text': controller.text,
+                        'time': DateTime.now(),
+                      });
                       controller.clear();
+                      _controller.animateTo(
+                        _controller.position.maxScrollExtent,
+                        duration: Duration(milliseconds: 250),
+                        curve: Curves.easeOut,
+                      );
                     },
                     decoration: InputDecoration(
                       hintText: "Send a message",
@@ -84,8 +90,16 @@ class _ChatPageState extends State<ChatPage> {
                         icon: Icon(Icons.send, color: KprimaryColor),
                         onPressed: () async {
                           if (controller.text.isNotEmpty) {
-                            await messages.add({'text': controller.text});
+                            await messages.add({
+                              'text': controller.text,
+                              'time': DateTime.now(),
+                            });
                             controller.clear();
+                            _controller.animateTo(
+                              _controller.position.maxScrollExtent,
+                              duration: Duration(milliseconds: 250),
+                              curve: Curves.easeOut,
+                            );
                           }
                         },
                       ),
